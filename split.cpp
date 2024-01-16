@@ -19,35 +19,36 @@ void split(Node*& in, Node*& odds, Node*& evens)
 {
   /* Add code here */
 // WRITE YOUR CODE HERE
-  if (in != NULL){
-    if (in->value % 2 == 1){
-     if (odds == NULL){
-        Node firstOdd = Node(in->value, NULL);
-        odds = &firstOdd;
-        in = in->next;
-      }
-      else {
-        Node newOdd = Node(in->value, NULL);
-        odds->next = &newOdd;
-        in = in->next;
-      }
+  if (in == NULL){
+    return;
+  }
+  if (in->value % 2 == 1){
+    if (odds == NULL){
+      Node firstOdd = Node(in->value, NULL);
+      odds = &firstOdd;
     }
     else {
-      if (evens == NULL){
-        Node firstEven = Node(in->value, NULL);
-        evens = &firstEven;
-        in = in->next;
-      }
-      else {
-        Node newEven = Node(in->value, NULL);
-        evens->next = &newEven;
-        in = in->next;
+      Node newOdd = Node(in->value, NULL);
+      Node* oddPtr = odds;
+      while (oddPtr->next != NULL){
+        oddPtr = oddPtr->next;
+        oddPtr->next = &newOdd;
       }
     }
   }
   else {
-    return;
+    if (evens == NULL){
+      Node firstEven = Node(in->value, NULL);
+      evens = &firstEven;
+    }
+    else {
+      Node newEven = Node(in->value, NULL);
+      evens->next = &newEven;
+      evens = &newEven;
+    }
   }
+  in = in->next;
+  
   split(in, odds, evens);
 }
 
