@@ -22,21 +22,25 @@ void split(Node*& in, Node*& odds, Node*& evens)
   if (in != NULL){
     if (in->value % 2 == 1){
      if (odds == NULL){
-        odds = &Node(in->value, NULL);
+        Node firstOdd = Node(in->value, NULL);
+        odds = &firstOdd;
         in = in->next;
       }
       else {
-        odds->next = &Node(in->value, NULL);
+        Node newOdd = Node(in->value, NULL);
+        odds->next = &newOdd;
         in = in->next;
       }
     }
     else {
       if (evens == NULL){
-        evens = &Node(in->value, NULL);
+        Node firstEven = Node(in->value, NULL);
+        evens = &firstEven;
         in = in->next;
       }
       else {
-        evens->next = &Node(in->value, NULL);
+        Node newEven = Node(in->value, NULL);
+        evens->next = &newEven;
         in = in->next;
       }
     }
