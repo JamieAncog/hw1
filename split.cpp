@@ -12,6 +12,10 @@ the function below should be the only one in this file.
 
 #include "split.h"
 #include<cstddef>
+#include <iostream>
+#include <cstddef>
+
+using namespace std;
 
 /* Add a prototype for a helper function here if you need */
 
@@ -19,37 +23,20 @@ void split(Node*& in, Node*& odds, Node*& evens)
 {
   /* Add code here */
 // WRITE YOUR CODE HERE
+
   if (in == NULL){
     return;
   }
-  if (in->value % 2 == 1){
-    if (odds == NULL){
-      Node firstOdd = Node(in->value, NULL);
-      odds = &firstOdd;
-    }
-    else {
-      Node newOdd = Node(in->value, NULL);
-      Node* oddPtr = odds;
-      while (oddPtr->next != NULL){
-        oddPtr = oddPtr->next;
-        oddPtr->next = &newOdd;
-      }
-    }
+  if (odds == NULL){
+    Node firstOdd = Node(in->value, NULL);
+    odds = &firstOdd;
+    split(in->next, odds, evens);
   }
-  else {
-    if (evens == NULL){
-      Node firstEven = Node(in->value, NULL);
-      evens = &firstEven;
-    }
-    else {
-      Node newEven = Node(in->value, NULL);
-      evens->next = &newEven;
-      evens = &newEven;
-    }
+  else if (odds->next == NULL){
+    Node newOdd = Node(in->value, NULL);
+    odds->next = &newOdd;
+    split(in->next, odds, evens);
   }
-  in = in->next;
-  
-  split(in, odds, evens);
 }
 
 /* If you needed a helper function, write it here */
