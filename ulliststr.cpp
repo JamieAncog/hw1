@@ -26,6 +26,36 @@ size_t ULListStr::size() const
 
 // WRITE YOUR CODE HERE
 
+void ULListStr::push_back(const std::string& val){
+
+}
+
+void ULListStr::push_front(const std::string& val){
+
+}
+
+void ULListStr::pop_back(){
+
+}
+
+void ULListStr::pop_front(){
+  
+}
+
+std::string const & ULListStr::back() const{
+
+}
+
+std::string const & ULListStr::front() const{
+
+}
+
+//FIX THIS!!!!
+std::string a = "hi";
+std::string* ULListStr::getValAtLoc(size_t loc) const {
+  return &a;
+}
+
 void ULListStr::set(size_t loc, const std::string& val)
 {
   std::string* ptr = getValAtLoc(loc);
