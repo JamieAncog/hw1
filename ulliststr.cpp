@@ -2,6 +2,10 @@
 #include <stdexcept>
 #include "ulliststr.h"
 
+//Delete this
+#include <iostream>
+using namespace std;
+
 ULListStr::ULListStr()
 {
   head_ = NULL;
@@ -27,37 +31,36 @@ size_t ULListStr::size() const
 // WRITE YOUR CODE HERE
 
 void ULListStr::push_back(const std::string& val){
-  if (head_ == NULL){
+  if (tail_ == NULL){
     Item* newItem = new Item();
-    newItem->last = ARRSIZE;
-    newItem->first = ARRSIZE-1;
-    //newItem->prev = NULL;
-    //newItem->next = NULL;
+    newItem->last = 1;
+    newItem->first = 0;
+    newItem->prev = NULL;
+    newItem->next = NULL;
     head_ = newItem;
     tail_ = newItem;
-    newItem->val[ARRSIZE-1] = val;   
+    newItem->val[0] = val;   
   }
   else {
     if (tail_->last == ARRSIZE){
       Item* newItem = new Item();
-      newItem->last = ARRSIZE;
-      newItem->first = ARRSIZE-1;
+      newItem->last = 1;
+      newItem->first = 0;
       newItem->prev = tail_;
-      //newItem->next = NULL;
+      newItem->next = NULL;
       tail_->next = newItem;
       tail_ = newItem;
-      newItem->val[ARRSIZE-1] = val;
+      newItem->val[0] = val;
     }
     else {
-      tail_->last++;
       tail_->val[tail_->last] = val;
+      tail_->last++;
     }
   }
   size_++;
 }
 
 void ULListStr::push_front(const std::string& val){
-
 }
 
 void ULListStr::pop_back(){
@@ -83,14 +86,13 @@ std::string* ULListStr::getValAtLoc(size_t loc) const {
     return NULL;
   }
   Item* temp = head_;
-  return &head_->val[head_->first+loc];
   while (temp != NULL){
-    size_t range = temp->last - temp->first;
-    if (loc <= range){
+    size_t numInItem = temp->last - temp->first;
+    if (loc < numInItem){
       return &temp->val[temp->first+loc];
     }
     else {
-      loc -= range;
+      loc -= numInItem;
     }
     temp = temp->next;
   }

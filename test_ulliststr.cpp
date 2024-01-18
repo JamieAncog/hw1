@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "ulliststr.h"
+#include <string>
 using namespace std;
 
 //Use this file to test your ulliststr implementation before running the test suite
@@ -11,7 +12,10 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     ULListStr package;
-    package.push_back("bob");
-    package.push_back("by");
-    cout << package.get(1) << endl;
+    for (int i = 0; i < 35; i++){
+        package.push_back(to_string(i));
+    }
+    for (int i = 0; i < 35; i++){
+        cout << package.get(i) << endl;
+    }
 }
