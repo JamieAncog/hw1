@@ -29,22 +29,31 @@ size_t ULListStr::size() const
 void ULListStr::push_back(const std::string& val){
   if (head_ == NULL){
     Item* newItem = new Item();
-    newItem->last = ARRSIZE-1;
+    newItem->last = ARRSIZE;
     newItem->first = ARRSIZE-1;
     //newItem->prev = NULL;
     //newItem->next = NULL;
-    head_ = newItem;   
+    head_ = newItem;
+    tail_ = newItem;
+    newItem->val[ARRSIZE-1] = val;   
   }
   else {
-    Item* temp = head_;
-    while (temp->next != NULL){
-      temp = temp->next;
-    }
-    if (temp->last == ARRSIZE-1){
+    if (tail_->last == ARRSIZE){
       Item* newItem = new Item();
-      newItem->last = 
+      newItem->last = ARRSIZE;
+      newItem->first = ARRSIZE-1;
+      newItem->prev = tail_;
+      //newItem->next = NULL;
+      tail_->next = newItem;
+      tail_ = newItem;
+      newItem->val[ARRSIZE-1] = val;
+    }
+    else {
+      tail_->last++;
+      tail_->val[tail_->last] = val;
     }
   }
+  size_++;
 }
 
 void ULListStr::push_front(const std::string& val){
@@ -69,10 +78,23 @@ std::string const & ULListStr::front() const{
 }
 */
 
-//FIX THIS!!!!
-std::string a = "hi";
 std::string* ULListStr::getValAtLoc(size_t loc) const {
-  return &a;
+  if (loc > size_ || head_ == NULL){
+    return NULL;
+  }
+  Item* temp = head_;
+  return &head_->val[head_->first+loc];
+  while (temp != NULL){
+    size_t range = temp->last - temp->first;
+    if (loc <= range){
+      return &temp->val[temp->first+loc];
+    }
+    else {
+      loc -= range;
+    }
+    temp = temp->next;
+  }
+  return NULL;
 }
 
 void ULListStr::set(size_t loc, const std::string& val)
