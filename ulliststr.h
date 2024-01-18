@@ -83,7 +83,7 @@ class ULListStr {
    *   - MUST RUN in O(1)
    */
   std::string const & back() const;
-
+    
   /**
    * Returns a const reference to the front element
    *   - MUST RUN in O(1)

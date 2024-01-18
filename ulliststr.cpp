@@ -98,15 +98,15 @@ void ULListStr::pop_front(){
   
 }
 
-/*
-std::string const & ULListStr::back() const{
 
+std::string const & ULListStr::back() const{
+  return tail_->val[tail_->last-1];
 }
 
 std::string const & ULListStr::front() const{
-
+  return head_->val[head_->first];
 }
-*/
+
 
 std::string* ULListStr::getValAtLoc(size_t loc) const {
   if (loc > size_ || head_ == NULL){
