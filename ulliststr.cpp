@@ -27,7 +27,24 @@ size_t ULListStr::size() const
 // WRITE YOUR CODE HERE
 
 void ULListStr::push_back(const std::string& val){
-
+  if (head_ == NULL){
+    Item* newItem = new Item();
+    newItem->last = ARRSIZE-1;
+    newItem->first = ARRSIZE-1;
+    //newItem->prev = NULL;
+    //newItem->next = NULL;
+    head_ = newItem;   
+  }
+  else {
+    Item* temp = head_;
+    while (temp->next != NULL){
+      temp = temp->next;
+    }
+    if (temp->last == ARRSIZE-1){
+      Item* newItem = new Item();
+      newItem->last = 
+    }
+  }
 }
 
 void ULListStr::push_front(const std::string& val){
@@ -42,6 +59,7 @@ void ULListStr::pop_front(){
   
 }
 
+/*
 std::string const & ULListStr::back() const{
 
 }
@@ -49,6 +67,7 @@ std::string const & ULListStr::back() const{
 std::string const & ULListStr::front() const{
 
 }
+*/
 
 //FIX THIS!!!!
 std::string a = "hi";

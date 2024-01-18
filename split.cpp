@@ -19,24 +19,42 @@ using namespace std;
 
 /* Add a prototype for a helper function here if you need */
 
+
 void split(Node*& in, Node*& odds, Node*& evens)
 {
   /* Add code here */
 // WRITE YOUR CODE HERE
-
-  if (in == NULL){
+  if (in != NULL){
+    if (in->value % 2 == 1){
+     if (odds == NULL){
+        Node firstOdd = Node(in->value, NULL);
+        odds = &firstOdd;
+        in = in->next;
+      }
+      else {
+        Node newOdd = Node(in->value, NULL);
+        odds->next = &newOdd;
+        odds = &newOdd;
+        in = in->next;
+      }
+    }
+    else {
+      if (evens == NULL){
+        Node firstEven = Node(in->value, NULL);
+        evens = &firstEven;
+        in = in->next;
+      }
+      else {
+        Node newEven = Node(in->value, NULL);
+        evens->next = &newEven;
+        evens = &newEven;
+        in = in->next;
+      }
+    }
+  }
+  else {
     return;
   }
-  if (odds == NULL){
-    Node firstOdd = Node(in->value, NULL);
-    odds = &firstOdd;
-    split(in->next, odds, evens);
-  }
-  else if (odds->next == NULL){
-    Node newOdd = Node(in->value, NULL);
-    odds->next = &newOdd;
-    split(in->next, odds, evens);
-  }
+  split(in, odds, evens);
 }
-
 /* If you needed a helper function, write it here */
