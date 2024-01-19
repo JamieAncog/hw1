@@ -115,7 +115,26 @@ void ULListStr::pop_back(){
 }
 
 void ULListStr::pop_front(){
-  
+  if (head_ == NULL){
+    return;
+  }
+  else {
+    size_--;
+    if (head_->last - head_->first == 1){
+      if (head_ == tail_){
+        Item* temp = head_;
+        delete temp;
+        head_ = NULL;
+        tail_ = NULL;
+      }
+      Item* temp = head_;
+      head_ = head_->next;
+      delete temp;
+    }
+    else {
+      head_->first++;
+    }
+  }
 }
 
 

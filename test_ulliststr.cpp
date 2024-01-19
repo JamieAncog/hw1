@@ -13,6 +13,7 @@ int main(int argc, char* argv[])
 {
     ULListStr package;
     package.pop_back();
+    package.pop_front();
     for (int i = 10; i >= 0; i--){
         package.push_front(to_string(i));
     }
@@ -20,7 +21,7 @@ int main(int argc, char* argv[])
         package.push_back(to_string(i));
     }
     package.pop_back();
-    package.pop_back();
+    package.pop_front();
     for (int i = 0; i < 21; i++){
         cout << package.get(i) << endl;
     }
