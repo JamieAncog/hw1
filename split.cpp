@@ -18,43 +18,56 @@ the function below should be the only one in this file.
 using namespace std;
 
 /* Add a prototype for a helper function here if you need */
+void checkLast(Node*& list, int mod2);
 
-
-void split(Node*& in, Node*& odds, Node*& evens)
-{
-  /* Add code here */
-// WRITE YOUR CODE HERE
-  if (in != NULL){
-    if (in->value % 2 == 1){
-     if (odds == NULL){
-        Node firstOdd = Node(in->value, NULL);
-        odds = &firstOdd;
-        in = in->next;
-      }
-      else {
-        Node newOdd = Node(in->value, NULL);
-        odds->next = &newOdd;
-        odds = &newOdd;
-        in = in->next;
-      }
+void split(Node*& in, Node*& odds, Node*& evens){
+  if (in == NULL){
+    checkLast(evens, 1);
+    checkLast(odds, 0);
+    return;
+  }
+  if (in->value % 2 == 1){
+    if (odds == NULL){
+      odds = in;
     }
     else {
-      if (evens == NULL){
-        Node firstEven = Node(in->value, NULL);
-        evens = &firstEven;
-        in = in->next;
+      Node* prevOdd = odds;
+      Node* tempOdd = odds;
+      while (tempOdd != NULL && tempOdd->value < in->value){
+        if (tempOdd->value % 2 == 1){
+          prevOdd = tempOdd;
+        }
+        tempOdd = tempOdd->next;
       }
-      else {
-        Node newEven = Node(in->value, NULL);
-        evens->next = &newEven;
-        evens = &newEven;
-        in = in->next;
-      }
+      prevOdd->next = in;
     }
   }
   else {
-    return;
+    if (evens == NULL){
+      evens = in;
+    }
+    else {
+      Node* prevEven = evens;
+      Node* tempEven = evens;
+      while (tempEven != NULL && tempEven->value < in->value){
+        if (tempEven->value % 2 == 0){
+          prevEven = tempEven;
+        }
+        tempEven = tempEven->next;
+      }
+      prevEven->next = in;
+    }
   }
+  in = in->next;
   split(in, odds, evens);
 }
-/* If you needed a helper function, write it here */
+
+void checkLast(Node*& list, int mod2){
+    Node* temp = list;
+    while (temp->next->next != NULL){
+      temp = temp->next;
+    }
+    if (temp->next->value % 2 == mod2){
+      temp->next = NULL;
+    }
+}

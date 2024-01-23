@@ -18,16 +18,16 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     int dat[] = {1,2,3,4,5,6,7,8,9};
-    Node node9 = Node(dat[8], NULL);
-    Node node8 = Node(dat[7], &node9);
-    Node node7 = Node(dat[6], &node8);
-    Node node6 = Node(dat[5], &node7);
-    Node node5 = Node(dat[4], &node6);
-    Node node4 = Node(dat[3], &node5);
-    Node node3 = Node(dat[2], &node4);
-    Node node2 = Node(dat[1], &node3);
-    Node node1 = Node(dat[0], &node2);
-    Node* myNode = &node1;
+    Node* node9 = new Node(dat[8], NULL);
+    Node* node8 = new Node(dat[7], node9);
+    Node* node7 = new Node(dat[6], node8);
+    Node* node6 = new Node(dat[5], node7);
+    Node* node5 = new Node(dat[4], node6);
+    Node* node4 = new Node(dat[3], node5);
+    Node* node3 = new Node(dat[2], node4);
+    Node* node2 = new Node(dat[1], node3);
+    Node* node1 = new Node(dat[0], node2);
+    Node* myNode = node1;
 
     while (myNode != NULL){
         cout << myNode->value << " ";
@@ -36,17 +36,23 @@ int main(int argc, char* argv[])
 
     cout << endl;
 
-    Node* head = &node1;
+    Node* head = node1;
     Node* odds = NULL;
     Node* evens = NULL;
 
     split(head, odds, evens);
 
-    cout << odds->value << endl;
-    cout << evens->value << endl;
-    /*
-    cout << odds->value << endl;
-    odds = odds->next;
-    cout << odds->value << endl;
-    */
+    while (odds != NULL){
+        cout << odds->value << " ";
+        odds = odds->next;
+    }
+    cout << endl;
+
+    while (evens != NULL){
+        cout << evens->value << " ";
+        evens = evens->next;
+    }
+
+    cout << endl;
+
 }
