@@ -18,7 +18,8 @@ the function below should be the only one in this file.
 using namespace std;
 
 /* Add a prototype for a helper function here if you need */
-void checkLast(Node*& list, int mod2);
+void checkLast(Node* list, int oppMod2);
+void setNext(Node* prev, Node* temp, Node* in, int mod2);
 
 void split(Node*& in, Node*& odds, Node*& evens){
   if (in == NULL){
@@ -31,15 +32,7 @@ void split(Node*& in, Node*& odds, Node*& evens){
       odds = in;
     }
     else {
-      Node* prevOdd = odds;
-      Node* tempOdd = odds;
-      while (tempOdd != NULL && tempOdd->value < in->value){
-        if (tempOdd->value % 2 == 1){
-          prevOdd = tempOdd;
-        }
-        tempOdd = tempOdd->next;
-      }
-      prevOdd->next = in;
+      setNext(odds, odds, in, 1);
     }
   }
   else {
@@ -47,27 +40,35 @@ void split(Node*& in, Node*& odds, Node*& evens){
       evens = in;
     }
     else {
-      Node* prevEven = evens;
-      Node* tempEven = evens;
-      while (tempEven != NULL && tempEven->value < in->value){
-        if (tempEven->value % 2 == 0){
-          prevEven = tempEven;
-        }
-        tempEven = tempEven->next;
-      }
-      prevEven->next = in;
+      setNext(evens, evens, in, 0);
     }
   }
   in = in->next;
   split(in, odds, evens);
 }
 
-void checkLast(Node*& list, int mod2){
-    Node* temp = list;
-    while (temp->next->next != NULL){
-      temp = temp->next;
+void checkLast(Node* list, int oppMod2){
+    if (list->next->next == NULL){
+      if (list->next->value % 2 == oppMod2){
+        list->next = NULL;
+      }
+      return;
     }
-    if (temp->next->value % 2 == mod2){
-      temp->next = NULL;
+    else {
+      list = list->next;
+      checkLast(list, oppMod2);
     }
+}
+
+void setNext(Node* prev, Node* temp, Node* in, int mod2){
+  if (temp == NULL || temp->value >= in->value){
+    prev->next = in;
+    return;
+  }
+  else {
+    if (temp->value % 2 == mod2){
+      prev = temp;
+    }
+    setNext(prev, temp->next, in, mod2);
+  }
 }

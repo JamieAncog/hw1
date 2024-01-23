@@ -17,7 +17,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    int dat[] = {1,2,3,4,5,6,7,8,9};
+    int dat[] = {1,4,6,7,8,9,10,11,12};
     Node* node9 = new Node(dat[8], NULL);
     Node* node8 = new Node(dat[7], node9);
     Node* node7 = new Node(dat[6], node8);
