@@ -44,13 +44,17 @@ int main(int argc, char* argv[])
 
     while (odds != NULL){
         cout << odds->value << " ";
+        Node* temp = odds;
         odds = odds->next;
+        delete temp;
     }
     cout << endl;
 
     while (evens != NULL){
         cout << evens->value << " ";
+        Node* temp = evens;
         evens = evens->next;
+        delete temp;
     }
 
     cout << endl;
