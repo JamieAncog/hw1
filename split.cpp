@@ -11,8 +11,6 @@ the function below should be the only one in this file.
 */
 
 #include "split.h"
-#include<cstddef>
-#include <iostream>
 #include <cstddef>
 
 using namespace std;
@@ -22,6 +20,8 @@ void checkLast(Node* list, int oppMod2);
 void setNext(Node* prev, Node* temp, Node* in, int mod2);
 
 void split(Node*& in, Node*& odds, Node*& evens){
+    /* Add code here */
+// WRITE YOUR CODE HERE
   if (in == NULL){
     checkLast(evens, 1);
     checkLast(odds, 0);
@@ -47,6 +47,7 @@ void split(Node*& in, Node*& odds, Node*& evens){
   split(in, odds, evens);
 }
 
+/* If you needed a helper function, write it here */
 void checkLast(Node* list, int oppMod2){
     if (list->next->next == NULL){
       if (list->next->value % 2 == oppMod2){
