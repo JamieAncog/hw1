@@ -15,48 +15,100 @@ g++ split.cpp test_split.cpp -o test_split
 
 using namespace std;
 
+void newList(Node*& first, int* dat, int datSize);
+void printList(Node* first);
+void deallocateList(Node*& first);
+
 int main(int argc, char* argv[])
 {
-    int dat[] = {1,4,6,7,8,9,10,11,12};
-    Node* node9 = new Node(dat[8], NULL);
-    Node* node8 = new Node(dat[7], node9);
-    Node* node7 = new Node(dat[6], node8);
-    Node* node6 = new Node(dat[5], node7);
-    Node* node5 = new Node(dat[4], node6);
-    Node* node4 = new Node(dat[3], node5);
-    Node* node3 = new Node(dat[2], node4);
-    Node* node2 = new Node(dat[1], node3);
-    Node* node1 = new Node(dat[0], node2);
-    Node* myNode = node1;
-
-    while (myNode != NULL){
-        cout << myNode->value << " ";
-        myNode = myNode->next;
-    }
-
-    cout << endl;
-
-    Node* head = node1;
     Node* odds = NULL;
     Node* evens = NULL;
+    Node* head = NULL;
 
+    //Testing Average Case
+    cout << "Next List: " << endl;
+    int datA[] = {1,4,6,7,8,9,10,11,12};
+    newList(head, datA, 9);
+    printList(head);
     split(head, odds, evens);
+    printList(odds);
+    printList(evens);
+    deallocateList(odds);
+    deallocateList(evens);
+    cout << "--------------------" << endl;
 
-    while (odds != NULL){
-        cout << odds->value << " ";
-        Node* temp = odds;
-        odds = odds->next;
-        delete temp;
+    //Testing All Evens
+    cout << "Next List: " << endl;
+    int datB[] = {2,4,6,8,10,12,14,16,18};
+    newList(head, datB, 9);
+    printList(head);
+    split(head, odds, evens);
+    printList(odds);
+    printList(evens);
+    deallocateList(odds);
+    deallocateList(evens);
+    cout << "--------------------" << endl;
+
+    //Testing All Odds
+    cout << "Next List: " << endl;
+    int datC[] = {1,3,5,7,9,11,13,15,17};
+    newList(head, datC, 9);
+    printList(head);
+    split(head, odds, evens);
+    printList(odds);
+    printList(evens);
+    deallocateList(odds);
+    deallocateList(evens);
+    cout << "--------------------" << endl;
+
+    //Testing All Same
+    cout << "Next List: " << endl;
+    int datD[] = {2,2,2,3,5,5,5,6};
+    newList(head, datD, 8);
+    printList(head);
+    split(head, odds, evens);
+    printList(odds);
+    printList(evens);
+    deallocateList(odds);
+    deallocateList(evens);
+    cout << "--------------------" << endl;
+
+    //Testing Zeros
+    cout << "Next List: " << endl;
+    int datE[] = {0,0,2,3};
+    newList(head, datE, 4);
+    printList(head);
+    split(head, odds, evens);
+    printList(odds);
+    printList(evens);
+    deallocateList(odds);
+    deallocateList(evens);
+    cout << "--------------------" << endl;
+
+}
+
+void newList(Node*& first, int* dat, int datSize){
+    first = new Node(dat[0], NULL);
+    Node* temp = first;
+    for (int i = 1; i < datSize; i++){
+        Node* newNode = new Node(dat[i], NULL);
+        temp->next = newNode;
+        temp = newNode;
+    }
+}
+
+void printList(Node* first){
+    while (first != NULL){
+        cout << first->value << " ";
+        first = first->next;
     }
     cout << endl;
+}
 
-    while (evens != NULL){
-        cout << evens->value << " ";
-        Node* temp = evens;
-        evens = evens->next;
+void deallocateList(Node*& first){
+    while (first != NULL){
+        Node* temp = first;
+        first = first->next;
         delete temp;
     }
-
-    cout << endl;
-
 }

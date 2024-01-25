@@ -49,6 +49,9 @@ void split(Node*& in, Node*& odds, Node*& evens){
 
 /* If you needed a helper function, write it here */
 void checkLast(Node* list, int oppMod2){
+    if (list == NULL || list->next == NULL){
+      return;
+    }
     if (list->next->next == NULL){
       if (list->next->value % 2 == oppMod2){
         list->next = NULL;
@@ -62,7 +65,11 @@ void checkLast(Node* list, int oppMod2){
 }
 
 void setNext(Node* prev, Node* temp, Node* in, int mod2){
-  if (temp == NULL || temp->value >= in->value){
+  if (temp == NULL){
+    prev->next = in;
+    return;
+  }
+  else if (temp->value >= in->value && temp == in){
     prev->next = in;
     return;
   }
