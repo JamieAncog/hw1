@@ -52,10 +52,8 @@ void checkLast(Node* list, int oppMod2){
     if (list == NULL || list->next == NULL){
       return;
     }
-    if (list->next->next == NULL){
-      if (list->next->value % 2 == oppMod2){
-        list->next = NULL;
-      }
+    else if (list->next->value % 2 == oppMod2){
+      list->next = NULL;
       return;
     }
     else {

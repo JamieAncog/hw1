@@ -2,10 +2,6 @@
 #include <stdexcept>
 #include "ulliststr.h"
 
-//Delete this
-#include <iostream>
-using namespace std;
-
 ULListStr::ULListStr()
 {
   head_ = NULL;
