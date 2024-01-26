@@ -103,10 +103,12 @@ void ULListStr::pop_back(){
         head_ = NULL;
         tail_ = NULL;
       }
-      Item* temp = tail_;
-      tail_ = tail_->prev;
-      tail_->next = NULL;
-      delete temp;
+      else {
+        Item* temp = tail_;
+        tail_ = tail_->prev;
+        tail_->next = NULL;
+        delete temp;
+      }
     }
     else {
       tail_->last--;
@@ -127,9 +129,11 @@ void ULListStr::pop_front(){
         head_ = NULL;
         tail_ = NULL;
       }
-      Item* temp = head_;
-      head_ = head_->next;
-      delete temp;
+      else {
+        Item* temp = head_;
+        head_ = head_->next;
+        delete temp;
+      }
     }
     else {
       head_->first++;
